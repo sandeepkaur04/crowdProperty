@@ -18,10 +18,11 @@ Route::get('/', function () {
 });
 
 Route::match(['get','post'],'register','App\Http\Controllers\AuthController@register');
-Route::match(['get','post'],'login','App\Http\Controllers\AuthController@login');
+Route::match(['get','post'],'login','App\Http\Controllers\AuthController@login')->name('login');
 
-// check auth
-Route::get('/user/feed', 'App\Http\Controllers\AuthController@userFeed');
-Route::get('/user/feed/{ind}', 'App\Http\Controllers\AuthController@userFeedDetail');
-Route::post('/user/upd-url', 'App\Http\Controllers\AuthController@updateUrl');
-Route::get('logout', 'App\Http\Controllers\AuthController@logout');
+Route::group(['middleware'=>'auth'], function(){
+    Route::get('/user/feed', 'App\Http\Controllers\AuthController@userFeed');
+    Route::get('/user/feed/{ind}', 'App\Http\Controllers\AuthController@userFeedDetail');
+    Route::post('/user/upd-url', 'App\Http\Controllers\AuthController@updateUrl');
+    Route::get('logout', 'App\Http\Controllers\AuthController@logout');
+});

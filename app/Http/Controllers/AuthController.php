@@ -9,6 +9,9 @@ use Hash, Auth;
 class AuthController extends Controller
 {
     public function register(Request $request) {
+        if(Auth::check()) {
+            return redirect('/user/feed');
+        }
         if($request->isMethod('post')) {
             $validatedData = $request->validate([
                 'email' => 'required|unique:users|email',
@@ -32,6 +35,9 @@ class AuthController extends Controller
     }
 
     public function login(Request $request) {
+        if(Auth::check()) {
+            return redirect('/user/feed');
+        }
         if($request->isMethod('post')) {
             $validatedData = $request->validate([
                 'email' => 'required',
