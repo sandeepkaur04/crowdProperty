@@ -25,4 +25,12 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/user/feed/{ind}', 'App\Http\Controllers\AuthController@userFeedDetail');
     Route::post('/user/upd-url', 'App\Http\Controllers\AuthController@updateUrl');
     Route::get('logout', 'App\Http\Controllers\AuthController@logout');
+
+    Route::get('/batches','App\Http\Controllers\BatchController@index');
+    Route::match(['get','post'],'/batch/add','App\Http\Controllers\BatchController@add');
+    Route::get('/batch/end/{batch_id}','App\Http\Controllers\BatchController@endbatch');
+
+    Route::get('/consignments/{batch_id}','App\Http\Controllers\ConsignmentController@index');
+    Route::match(['get','post'],'/consignment/add/{batch_id}','App\Http\Controllers\ConsignmentController@add');
+    
 });

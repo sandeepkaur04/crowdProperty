@@ -12,7 +12,10 @@
 
 <div class="container">
     @if(Auth::check())
-    <a href="{{ url('/logout') }}" class="pull-right"> Logout</a>
+    <span class="pull-right">
+      <a href="{{ url('/batches') }}"> Batches</a> | 
+      <a href="{{ url('/logout') }}"> Logout</a>
+    </span>
     @endif
     @yield('content')
 </div>
